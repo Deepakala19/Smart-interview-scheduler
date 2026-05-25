@@ -1,0 +1,13 @@
+{
+  "name": "smart-interview-scheduler-root",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run backend\" \"npm run dev --prefix frontend\"",
+    "backend": "npm run dev --prefix backend",
+    "install-frontend": "npm install --prefix frontend",
+    "install-backend": "npm install --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

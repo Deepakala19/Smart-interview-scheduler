@@ -1,0 +1,56 @@
+{
+  "name": "Interview Scheduler - Calendar Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "interview-sync",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "id": "e4a8b7c0-1234-4567-8901-234567890abc"
+    },
+    {
+      "parameters": {
+        "calendar": "primary",
+        "summary": "={{$json.interview.title}}",
+        "description": "={{$json.interview.description}}",
+        "start": "={{$json.interview.date}}T{{$json.interview.startTime}}:00Z",
+        "end": "={{$json.interview.date}}T{{$json.interview.endTime}}:00Z",
+        "additionalFields": {
+          "attendees": [
+            "={{$json.interview.candidate.email}}",
+            "={{$json.interview.admin.email}}"
+          ]
+        }
+      },
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ],
+      "id": "f5b9c8d1-2345-5678-9012-345678901def"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
